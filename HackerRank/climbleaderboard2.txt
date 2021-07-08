@@ -1,0 +1,25 @@
+int* climbingLeaderboard(int scores_count, int* scores, int alice_count, int* alice, int* result_count) 
+{
+    *result_count=alice_count;
+    int *rank=calloc(alice_count,(sizeof(int)));
+    int temp,ecount,rpt;
+    for(int j=0;j<alice_count;j++)
+    {
+        rpt=-1;
+        ecount=0;
+        for(int i=0;(temp=i)<scores_count;i++)
+        {
+            if(rpt==*(scores+i))
+                ecount++;
+            rpt=*(scores+i);
+            if(*(alice+j)>=*(scores+i))
+               {
+                    temp=i;
+                    break;
+               }
+            
+        }
+        *(rank+j)=temp+1-ecount;
+    }
+    return rank;
+}

@@ -1,0 +1,88 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+
+
+long partition (long long * arr, long low, long high)
+{
+    long long t,pivot = *(arr + high);
+    long j,i = (low - 1);
+
+    for (j = low; j <=( high- 1); j++)
+    {
+        if (*(arr + j) >= pivot)
+        {
+            i++;
+            t=*(arr+i);
+            *(arr+i)=*(arr+j);
+            *(arr+j)=t;
+        }
+    }
+    t=*(arr+i+1);
+    *(arr+i+1)=*(arr+high);
+    *(arr+high)=t;
+
+    return (i + 1);
+}
+
+long long * quickSort(long long * arr, long low, long high)
+{
+    if (low < high)
+    {
+
+        long pi = partition(arr, low, high);
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+
+        return arr;
+    }
+}
+
+
+
+void carsell(void)
+{
+    printf("\n");
+    long n,i;
+    long long sum=0;
+
+
+    printf("enter number of cars\n");
+    scanf("%ld",&n);
+    long long *p=(long long *)calloc(n,sizeof(long long));
+    printf("enter their prices\n");
+
+    for(i=0;i<n;i++)
+        scanf("%lld",(p+i));
+    p=quickSort(p, 0 ,n-1);
+
+    for(i=0;i<n;i++)
+        printf("%lld ",*(p+i));
+     printf("\n");
+
+    for(i=0;i<n;i++)
+    {
+        if(*(p+i)>i)
+            sum=sum+(*(p+i))-i;
+    }
+
+    sum%=1000000007;
+    printf("%lld\n",sum);
+
+    return;
+}
+
+
+
+int main()
+{
+    int T,i;
+    printf("enter no of test cases\n");
+    scanf("%d",&T);
+    for(i=0;i<T;i++)
+    {
+        carsell();
+    }
+
+    return 0;
+}

@@ -1,0 +1,27 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void chefNstrings(void)
+{
+    int n;
+    long sum=0;
+    scanf("%d",&n);
+    int * s=(int*)calloc(n,sizeof(n));
+    scanf("%d",&s[0]);
+    for(int i=1;i<n;i++)
+    {
+        scanf("%d",&s[i]);
+        sum+=(int)(abs(s[i]-s[i-1])-1);
+    }
+    printf("%ld\n",sum);
+}
+int main()
+{
+    int T,i;
+    printf("enter no of test cases\n");
+    scanf("%d",&T);
+    for(i=0;i<T;i++)
+        chefNstrings();
+
+    return 0;
+}

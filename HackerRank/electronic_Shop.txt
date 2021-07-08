@@ -1,0 +1,20 @@
+int getMoneySpent(int keyboards_count, int* keyboards, int drives_count, int* drives, int b) {
+
+    /*
+     * Write your code here.
+     */
+
+     int i,j,sum=0,k,p=-1;
+     for(i=0;i<keyboards_count;i++)
+     {
+         k=*(keyboards+i);
+         for(j=0;j<drives_count;j++)
+         {
+             sum=(*(drives+j)+k);
+             if((p<sum)&&(sum<= b))
+                p=sum;
+         }
+     }
+     return p;
+
+}

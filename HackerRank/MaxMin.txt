@@ -1,0 +1,20 @@
+int maxMin(int k, int arr_count, int* arr) {
+
+    int i,j,key;
+    int unf=1000000000;
+
+    for(j=1;j<arr_count;j++)
+    {
+        key=*(arr+j);
+        for(i=j-1;(i>=0)&&(*(arr+i)>key);i--)
+            *(arr+i+1)=*(arr+i);
+        *(arr+i+1)=key;
+    }
+    
+    for(i=0;i<=(arr_count-k);i++)
+    {
+        if(abs(*(arr+i+k-1)-(*(arr+i)))<unf)
+            unf=abs(*(arr+i+k-1)-(*(arr+i)));
+    }
+    return unf;
+}

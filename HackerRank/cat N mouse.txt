@@ -1,0 +1,14 @@
+
+
+char* catAndMouse(int x, int y, int z) 
+{
+    static char rslt[10];
+    if(abs(x-z)<abs(y-z))
+        strcpy(rslt,"Cat A");  
+    else if(abs(x-z)>abs(y-z))
+        strcpy(rslt,"Cat B");
+    else
+        strcpy(rslt,"Mouse C");
+    return rslt;
+     
+}

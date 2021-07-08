@@ -1,0 +1,15 @@
+int sdigit(long long p){
+    if(p/10==0)
+        return p;
+    int a=0;
+    for(;t>0;p/=10)
+        a+=p%10;
+    return sdigit(a);
+}
+
+int superDigit(string n, int k) {
+    long long s=0;
+    for(int i=0;n[i]!='\0';i++)
+        s+=(int(n[i])-int('0'));    
+    return sdigit(s*k);
+}

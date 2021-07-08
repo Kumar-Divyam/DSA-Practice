@@ -1,0 +1,25 @@
+char* twoArrays(int k, int A_count, int* A, int B_count, int* B) {
+    int i,j,key;
+    for(j=1;j<A_count;j++)
+    {
+        key=*(A+j);
+        for(i=j-1;(i>=0)&&(*(A+i)>key);i--)
+            *(A+i+1)=*(A+i);
+        *(A+i+1)=key;
+    }
+
+    for(j=1;j<B_count;j++)
+    {
+        key=*(B+j);
+        for(i=j-1;(i>=0)&&(*(B+i)<key);i--)
+            *(B+i+1)=*(B+i);
+        *(B+i+1)=key;
+    }
+
+    for(i=0;i<A_count;i++)
+    {
+        if((*(A+i)+(*(B+i)))<k)
+            return "NO";
+    }
+    return "YES";
+}

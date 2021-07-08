@@ -1,0 +1,20 @@
+int Solution::romanToInt(string A) {
+    map<char, int> m;
+    m.insert(make_pair('I',1));
+    m.insert(make_pair('V',5));
+    m.insert(make_pair('X',10));
+    m.insert(make_pair('L',50));
+    m.insert(make_pair('C',100));
+    m.insert(make_pair('D',500));
+    m.insert(make_pair('M',1000));
+    int res=0,i;
+    for(i=0; i< A.length()-1; i++){
+        if(m[A[i]]<m[A[i+1]]){
+            res-=m[A[i]];
+        }
+        else
+            res+=m[A[i]];
+    }
+    res+=m[A[i]];
+    return res;
+}

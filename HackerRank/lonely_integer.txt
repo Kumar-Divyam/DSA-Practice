@@ -1,0 +1,21 @@
+int lonelyinteger(int a_count, int* a) {
+
+    int i,j,k;
+    for(i=0;i<a_count;i++)
+    {
+        k=0;
+        for(j=0;j<a_count;j++)
+        {
+            if(*(a+i)==(*(a+j)))
+                k++;
+
+            if(k==2)
+                break;
+        }
+        if(k==1)
+            break;
+    }
+
+    k=*(a+i);return k;
+   
+}

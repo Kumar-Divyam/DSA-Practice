@@ -1,0 +1,17 @@
+int* serviceLane(int n,int* width, int cases_rows, int cases_columns, int** cases, int* result_count) {
+    *result_count=cases_rows;
+    int *a=(int*)calloc(cases_rows,sizeof(int));
+    int i,j,k,min;
+    for(i=0; i<cases_rows ; i++)
+    {
+        min=4;
+        for(j=cases[i][0] ; j<=cases[i][1] ; j++)
+        {
+            if(width[j]<min)
+                min=width[j];
+        }
+        a[i]=min;
+    }
+    return a;
+    
+}

@@ -1,0 +1,137 @@
+//BY ME
+
+typedef struct Trie{
+	struct Trie* child[26];
+	bool isword;
+	int prefixes;
+}Trie;
+
+Trie* getnode(){
+  Trie * t = new Trie();
+  t->isword=false;
+  for(int i=0;i<26;i++){
+	t->child[i]=NULL;	
+  }
+  t->prefixes=0;
+  return t;
+}
+
+void insert(Trie * root, string w){
+  if(w.length()==0)
+	root->isword=true;
+  else{
+	char cur=w[0];
+	if(!root->child[cur-'a'])
+		root->child[cur-'a']=getnode();
+	root->child[cur-'a']->prefixes++;
+	insert(root->child[cur-'a'],w.substr(1,w.length()-1));
+  }
+  return;
+}
+
+//SEARCH IMPLEMENTATION   -> CHECK ONCE
+// bool search(Trie *root,string w){
+//   if(w.length()==0)
+// 	return true;
+//   Trie* t=root;
+//   for(int i=0;i<w.length();){
+// 	if(!t->child[w[i]-'a'])
+// 		return false;
+// 	t=t->child[w[i]-'a'];
+//   }
+//   if(t->isword)
+// 	return true;
+//   return false;
+// }
+
+
+int countprefix(Trie* root, string w){
+  Trie* t=root;
+  for(int i=0 ; i<w.length() ; i++){
+    if(!t->child[w[i]-'a']) break;
+	    t=t->child[w[i]-'a'];
+	if(t->prefixes==1)
+		return i+1;
+  }
+  return w.length()-1;
+}
+
+
+vector<string> Solution::prefix(vector<string> &A) {
+  vector<string> res;
+  Trie* root =getnode();
+  for(int i=0 ; i<A.size() ; i++){
+	insert(root,A[i]);
+  }
+  Trie* t= root;
+  for(int i=0;i<A.size();i++){
+	int p=countprefix(root,A[i]);
+	res.push_back(A[i].substr(0,p));
+  }
+  return res;
+}
+
+
+
+
+
+
+/*
+// BY ARANYA
+typedef struct Trie{
+    struct Trie* children[26];
+    int words;
+    int prefixes;
+}Trie;
+
+Trie* returnNode(){
+    Trie* node = new Trie;
+    node->words = 0;
+    node->prefixes = 0;
+    for(int i=0;i<26;i++){
+        node->children[i]=NULL;
+    }
+    return node;
+}
+
+void insertNode(Trie* root, string key){
+    Trie* temp = root;
+    for(int i=0;i<key.length();i++){
+        if(temp->children[key[i]-'a']==NULL)
+            temp->children[key[i]-'a'] = returnNode();
+        temp->children[key[i]-'a']->prefixes++;
+        temp = temp->children[key[i]-'a'];
+    }
+    temp->words++;
+}
+
+int searchNode(Trie* root, string key){
+    Trie* temp = root;
+    int count=1;
+    for(int i=0;i<key.length();i++){
+        if(temp->children[key[i]-'a']!=NULL){
+            if(temp->children[key[i]-'a']->prefixes>1)
+                count++;
+            else
+                break;
+        }
+        temp = temp->children[key[i]-'a'];
+    }
+    return count;
+}
+
+
+vector<string> Solution::prefix(vector<string> &A) {
+    vector<string> res;
+    Trie* root = returnNode();
+    for(int i=0;i<A.size();i++){
+        insertNode(root,A[i]);
+    }
+    for(int i=0;i<A.size();i++){
+        Trie* temp = root;
+        string ans = "";
+        res.push_back(A[i].substr(0,searchNode(root,A[i])));
+    }
+    return res;
+}
+*/

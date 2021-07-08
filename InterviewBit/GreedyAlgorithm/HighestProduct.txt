@@ -1,0 +1,32 @@
+//O(n)
+int Solution::maxp3(vector<int> &A) {
+    int mx1, mx2, mx3, mn1, mn2;
+    mx1 =mx2=mx3 = INT_MIN;
+    mn1=mn2= INT_MAX;
+
+    for (auto k : A) {
+        if (k > mx1)
+            mx3=mx2,mx2=mx1, mx1= k;
+        else if (k > mx2)
+            mx3=mx2, mx2= k;
+        else if (k >mx3)
+            mx3= k;
+
+        if (k < mn1)
+            mn2=mn1, mn1 = k;
+        else if (k < mn2)
+            mn2= k;
+    }
+
+    return max(mx1*mx2*mx3 , mx1*mn1*mn2);
+}
+
+/*
+//O(nlogn)
+int Solution::maxp3(vector<int> &A) {
+
+    sort(A.rbegin(), A.rend());
+    int ans = max(A[0] * A[1] * A[2], A[0] * A[A.size() - 1] * A[A.size() - 2]);
+    return ans;
+}
+*/

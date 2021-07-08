@@ -1,0 +1,17 @@
+ListNode* Solution::reverseList(ListNode* A, int B) {
+    int cnt=1;
+    ListNode * pre,*cur,*nxt;
+    pre=NULL;
+    cur=A;
+    while(cnt<=B && cur){
+        nxt=cur->next;
+        cur->next=pre;
+        pre=cur;
+        cur=nxt;
+        cnt++;
+    }
+    if(nxt){
+        A->next=reverseList(nxt,B);
+    }
+    return pre;
+}

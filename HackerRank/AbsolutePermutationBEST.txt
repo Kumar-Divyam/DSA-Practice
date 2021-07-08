@@ -1,0 +1,77 @@
+int* absolutePermutation(int n, int k, int* result_count) {
+    int *p=(int *)calloc(n,sizeof(int));
+    int i,j,f=0;
+
+    * result_count=n;
+
+
+    //this had TLE
+    /*for(i=1;i<=n;i++)
+    {
+        f=0;
+        if(i-k > 0)
+        {
+            for(j=0;j<i;j++)
+            {
+                if(*(p+j)== i-k)
+                {
+                    if(i+k<=n)
+                    {
+                        *(p+i-1)=i+k;f=1;
+                        break;
+                    }
+                    else
+                    {
+                        *result_count=1;*p=-1;
+                        return p;
+                    }
+                }
+            }
+            if(f==0)
+                *(p+i-1)=i-k;
+        }
+
+        else if(i+k <= n)
+        {            
+            *(p+i-1)=i+k;
+        }
+
+        else
+        {
+            *result_count=1;*p=-1;
+            return p;
+        }
+    }*/
+
+    //this passed all test cases ->
+    if(k> n/2)
+    {
+        *result_count=1;*p=-1;
+        return p;
+    }
+
+    for(i=1;i<=n;i++)
+    {
+        if(k>=i)
+            *(p+i-1)=i+k;
+        else
+        {
+            j=abs(2*k - i);
+            *(p+i-1)=i-k;
+            if(j==0)
+                continue;
+            
+            if(*(p+j-1)==*(p+i-1))
+            {
+                if(i+k <= n)
+                    *(p+i-1)=i+k;
+                else
+                {
+                    *result_count=1;*p=-1;
+                    return p;
+                }
+            }
+        }
+    }
+    return p;
+}

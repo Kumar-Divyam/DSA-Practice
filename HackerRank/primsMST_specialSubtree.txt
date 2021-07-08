@@ -1,0 +1,39 @@
+int selectmin(vector<bool> &mstset, vector<int> &dist){
+    int min=100001;
+    int minv;
+    for(int i=1 ; i<dist.size() ; i++){
+        if(mstset[i]==false && dist[i]< min){
+            minv=i;
+            min=dist[i];
+        }
+    }
+    return minv;
+}
+
+int prims(int n, vector<vector<int>> edges, int start) {
+    vector<pair<int,int>> adj[n+1];
+    vector<int> dist(n+1, 100001);
+    vector<bool> mstset(n+1, false);
+    for(int i=0 ; i<edges.size() ; i++){
+        adj[edges[i][0]].push_back({edges[i][1],edges[i][2]});
+        adj[edges[i][1]].push_back({edges[i][0],edges[i][2]});
+    }
+    int u;
+    dist[start]=0;
+    for(int i=0 ; i<n-1 ; i++){
+        u=selectmin(mstset, dist);
+        mstset[u]=true;
+        vector <pair<int,int>> :: iterator itr;
+        for(itr=adj[u].begin() ; itr!=adj[u].end() ; itr++){
+            //for(it=vec[i].begin(); it!=vec[i].end();it++) cout << it->first << " " << it->second << " -> ";
+            if((mstset[itr->first]==false) && itr->second<dist[itr->first]){
+                dist[itr->first]=itr->second;
+            }
+        }
+    }
+    int sum=0;
+    for(int i=1 ; i<n+1 ;i++ ){
+        sum+=dist[i];
+    }
+    return sum;
+}

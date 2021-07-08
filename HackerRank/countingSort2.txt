@@ -1,0 +1,29 @@
+int* countingSort(int arr_count, int* arr, int* result_count) {
+    * result_count=arr_count;
+    long i,j;
+    int k;
+
+    int *p=(int*)calloc(100,sizeof(int));
+
+    for(i=0; i<arr_count ; i++)
+        p[*(arr+i)]++;
+        
+    i=0;
+
+    for(j=0 ; j<100 ; j++)
+    {
+        if(p[j]>0)
+        {
+            k=p[j];
+            while(k>0)
+            {
+                arr[i]=j;
+                i++;k--;
+            }
+        }
+    }
+
+    return arr;
+
+
+}

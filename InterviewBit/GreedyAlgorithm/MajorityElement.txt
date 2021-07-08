@@ -1,0 +1,17 @@
+//moore-voting  --> O(n)
+
+int Solution::majorityElement(const vector<int> &A) {
+    int voter=A[0],votes=1;
+    for(int i=1;i<A.size();i++){
+        if(votes==0){
+            voter=A[i];votes++;
+        }
+        if(A[i]==voter)
+            votes++;
+        else
+            votes--;
+    }
+    return voter;
+}
+
+//or sort and check for window of n/2+1   --> O(nlogn)

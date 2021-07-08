@@ -1,0 +1,19 @@
+int Solution::removeDuplicates(vector<int> &A) {
+
+    int i=0,j=1;
+    while(j<A.size()){
+        if(A[j] == A[i]){
+            while(A[j] == A[i] && j < A.size()) j++;
+            int t=j;
+            if(t==A.size() && A[t-1]==A[i]){
+               A.erase(A.begin()+i,A.begin()+t-1);
+               break;
+            }
+            A.erase(A.begin()+i+1,A.begin()+t);
+        }
+        i++;
+        j=i+1;
+    }
+
+    return A.size();
+}

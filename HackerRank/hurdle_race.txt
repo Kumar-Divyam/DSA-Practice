@@ -1,0 +1,9 @@
+int hurdleRace(int k, int height_count, int* height) {
+    int z=k;
+    for(int i=0;i<height_count;i++)
+    {
+        if(*(height+i)>z)
+            z=(*(height+i));
+    }
+    return (z-k);
+}

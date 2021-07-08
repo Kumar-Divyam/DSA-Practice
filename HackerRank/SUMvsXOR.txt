@@ -1,0 +1,17 @@
+long sumXor(long n) {
+    long x,count=0;
+
+/*   for(x=0;x<=n;x++)
+    {
+        if((x+n)==(x^n))
+            count++;
+    }
+
+    return count;*/
+    while(n > 0)
+    {
+        if(!(n & 1)) count++;
+        n >>= 1;
+    } 
+    return pow(2, count);
+}

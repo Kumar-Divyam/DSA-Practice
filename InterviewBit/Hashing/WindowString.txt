@@ -1,0 +1,166 @@
+string Solution::minWindow(string A, string B) {
+    vector<int> m(128, 0);
+    for(int i=0;i<B.length();i++)
+        m[B[i]]++;
+        
+    int rem=B.length();
+    int l=0,r=0,start=0,minlen=INT_MAX;
+    while(r<A.length()){
+        if(--m[A[r++]] >= 0)
+            rem--;
+            
+        while(rem == 0){
+            if(r-l < minlen){  
+                minlen = r-l;
+                start = l;
+            }
+            if(++m[A[l++]]>0)
+                rem++;
+        }
+    }
+    if(minlen==INT_MAX)
+        return "";
+    return A.substr(start,minlen);
+}
+
+/*
+string Solution::minWindow(string A, string B) {
+    int hash_str[255] = {0}, hash_pat[255] = {0};
+    int n = A.length(), m = B.length();
+    int len = INT_MAX, s = -1;
+    
+    for(int i = 0; i < m; i++)
+        hash_pat[B[i]]++;
+    int i = 0, j = 0, count = 0;
+    for(j = 0; j < n; j++){
+        hash_str[A[j]]++;
+        
+        if(hash_pat[A[j]] != 0 && hash_str[A[j]] <= hash_pat[A[j]])
+            count++;
+        if(count == m){
+            while(hash_pat[A[i]] == 0 || hash_str[A[i]] > hash_pat[A[i]]){
+                hash_str[A[i]]--;
+                i++;
+            }
+            if(len > j - i + 1)
+                len = j - i + 1, s = i;
+        }
+    }
+    return s == -1 ? "" : A.substr(s, len);
+}
+
+*/
+
+/*
+bool cover(int a[], int w[]) {
+ 	for (int i = 0; i < 256; ++i) {
+    if (a[i] < w[i]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+string go(string s, string t) {
+  if (s.length() < t.length()) {
+    return "";
+  }
+  
+  const int n = (int) s.size();
+  int w[256];
+  memset(w, 0, sizeof(w));
+  for (auto c : t) {
+    w[c]++;
+  }
+  
+  int h[256]; 
+  memset(h, 0, sizeof(h));
+  
+  pair<int, int> ans{-1, -1};
+  int j = 0;
+  int len = INT_MAX;
+  for (int i = 0; i < n; ++i) {
+    h[s[i]]++;
+    if (cover(h, w)) {
+      while (j <= i && cover(h, w)) {
+        if (i - j + 1 < len) {
+          ans.first = j;
+          ans.second = i;
+          len = i - j + 1;
+        }
+        h[s[j]]--;
+        j++;
+      }
+    }
+  }
+  if (ans.first == -1 && ans.second == -1) {
+    return "";
+  }
+  return s.substr(ans.first, ans.second - ans.first + 1);
+}
+
+/**
+ * This is a much more efficent version 
+ */
+string min_window(const string &s, const string &t) {
+  const int n = (int) s.length();
+  const int m = (int) t.length();
+  int want[256] = {0};
+  for (const auto c : t) {
+    want[c]++;
+  }
+  
+  
+  // 2 pointers technique
+  // j moves first
+  int j = 0;
+  // then i shrinks accordinly
+  int i = 0;
+  
+  // count match so far
+  int cnt = 0;
+  
+  int found[256] = {0};
+  // our ans store a pair of {i, j}
+  pair<int, int> ans = {0, n};
+  for (; j < n; ++j) {
+    // out of interest
+    char c = s[j];
+    if (want[c] == 0) {
+      continue;
+    }
+    
+    // increasing found
+    found[c]++;
+    
+    if (found[c] <= want[c]) {
+      // keep counting :)
+      cnt++;
+    }
+    
+    // ok, we got it! it's time to shrink
+    if (cnt == m) {
+      while (i <= j && ((want[s[i]] == 0) || (found[s[i]] > want[s[i]]))) {
+        if (found[s[i]] > want[s[i]]) {
+          found[s[i]]--;
+        }
+        // shrink the window size
+        i++;
+      }
+      if ((j - i) < (ans.second - ans.first)) {
+        ans.first = i;
+        ans.second = j;
+      }
+    }
+  }
+  if (cnt == m) {
+    return s.substr(ans.first, ans.second - ans.first + 1);
+  }
+  return "";
+}
+
+string Solution::minWindow(string s, string t) {
+  return min_window(s, t);
+}
+
+*/

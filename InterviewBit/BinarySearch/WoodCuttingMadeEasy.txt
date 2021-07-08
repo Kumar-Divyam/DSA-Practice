@@ -1,0 +1,24 @@
+int Solution::solve(vector<int> &A, int B) {
+    
+    sort(A.begin(),A.end());
+    if(B==0) return A[A.size()-1];
+    int ans=0,sum=0,n_tree=0,i;
+    
+    for(i=A.size()-2;i>=0;i--){
+        sum=sum+((A.size()-i-1)*(A[i+1]-A[i]));
+        n_tree++;
+        if(sum >= B){
+            ans=A[i];            
+            break;
+        }
+    }
+    if(sum==B)
+        return ans;
+    if(i==0 && sum<B)
+        sum=sum+((A.size())*A[0]);
+        
+    int temp=sum-B;
+    temp/=n_tree;
+    return (ans+temp);
+    
+}

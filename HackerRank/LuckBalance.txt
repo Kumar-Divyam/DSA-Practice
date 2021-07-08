@@ -1,0 +1,33 @@
+int luckBalance(int k, int contests_rows, int contests_columns, int** contests) {
+    int i,j=0,x=0,TL=0,sum=0,min,indx;
+    int *p=(int*)calloc(contests_rows,sizeof(int));
+    for(i=0;i<contests_rows;i++)
+    {
+        TL+=contests[i][0];
+        if(contests[i][1]==1)
+            p[x++]=contests[i][0];
+    }
+
+    for(j=0;j<x;j++)
+        printf("%d ",p[j]);
+
+    for(i=1;i<=(x-k);i++)
+    {
+        min=100000;
+        for(j=0;j<x;j++)
+        {
+            if(p[j]<min)
+            {
+                min=p[j];indx=j;
+            }     
+        }
+        sum+=min;
+        p[indx]=100000;
+        printf("\n%d %d\n",min,sum);
+
+    }
+
+    printf("%d %d",sum,TL);
+    TL=TL-(2*sum);
+    return TL;
+}

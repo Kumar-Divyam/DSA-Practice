@@ -1,0 +1,35 @@
+int* cutTheSticks(int arr_count, int* arr, int* result_count) {
+
+    
+    int* p=(int *)calloc(1,sizeof(int));
+    int i,j,k,a,min;
+    for(i=0;i<arr_count;i++)
+    {
+        k=0;a=0,min=1000;
+        for(j=0;j<arr_count;j++)
+        {
+            if((*(arr+j)<min)&&(*(arr+j)>0))
+                min=*(arr+j);
+
+            if(*(arr+j)!=0)
+                k++;
+        }
+        
+        for(j=0;j<arr_count;j++)
+        {   
+            if(*(arr+j)>0)
+                *(arr+j)-=min;
+        }
+
+        if(k>0)
+        {
+            p = (int *)realloc(p, sizeof(int)*(i+1)); 
+            *(p+i)=k;
+        }
+        else
+            break;
+    }
+    *result_count = i;
+
+    return p;
+}

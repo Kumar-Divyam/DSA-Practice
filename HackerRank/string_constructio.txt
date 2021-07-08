@@ -1,0 +1,40 @@
+int stringConstruction(char* s) {
+
+    //char* p=(char *)calloc(100001,sizeof(char));
+    long i=0,j,k=0;
+    int count=1;
+
+    /* *(p+k)=*(s+i);i++;
+
+    for(i=1;i<strlen(s);i++)
+    {
+        printf("%d ",count);
+        for(j=0;j<=k;j++)
+        {
+            if(*(p+j)==(*(s+i)))
+            {
+                *(p+(++k))=*(s+i);
+                break;
+            }
+        }
+        if((j-1)==k)
+        {
+            count++;
+            *(p+(++k))=(*(s+i));   
+        }
+    }*/
+
+    count=1;
+    for(i=1;i<strlen(s);i++)
+    {
+        for(j=0;j<i;j++)
+        {
+            if(*(s+j)==*(s+i))
+                break;
+        }
+        if(j==i)
+            count++;
+    }
+
+    return count;
+}

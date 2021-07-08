@@ -1,0 +1,15 @@
+int Solution::gcd(int A, int B) {
+    if(A==0) return B;
+    if(B==0) return A;
+    if(A<B) swap(A, B);
+    return gcd(A%B, B);
+}
+
+
+OR
+
+int mygcd(int a,int b){
+    if (b == 0)
+        return a;
+    return mygcd(b, a % b);
+}

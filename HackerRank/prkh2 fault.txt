@@ -1,0 +1,37 @@
+#include <stdio.h>
+#include <stdlib.h>
+//largest sum sub array
+void main()
+{
+    int a[5],temp_s=0,i,j;
+    int *F,*L;
+    printf("enter 5 integers\n");
+    for(i=0;i<5;i++)
+        scanf("%d",&a[i]);
+    F=&a[0];
+    printf("sub arrays\t\t even sub arrays\n");
+    for(i=0;i<5;++i,++F)
+    {
+        L=&a[4];
+        for(j=4;j>=i;--j)
+        {
+            temp_s=0;
+            L=&a[j];
+            while(F<=L)
+            {
+                temp_s+=*L;
+                --L;
+
+            }
+            printf("%d\t\t\t",temp_s);
+            if((temp_s%2)==0)
+               printf("%d",temp_s);
+            printf("\n");
+        }
+    }
+
+    for(i=0;i<5;i++)
+        printf(" %d \t",a[i]);
+}
+
+

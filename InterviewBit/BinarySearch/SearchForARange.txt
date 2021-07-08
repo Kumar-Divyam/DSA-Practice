@@ -1,0 +1,10 @@
+vector<int> Solution::searchRange(const vector<int> &A, int B) {
+    int i=lower_bound(A.begin(),A.end(),B)-A.begin();
+    int j=upper_bound(A.begin(),A.end(),B)-A.begin();
+    vector<int> res(2,-1);
+    if(A[i]==B){
+        res[0]=i;res[1]=j-1;
+        return res;
+    }
+    return res;
+}

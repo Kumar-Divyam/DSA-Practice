@@ -1,0 +1,26 @@
+int* jimOrders(int orders_rows, int orders_columns, int** orders, int* result_count) {
+    *result_count = orders_rows;
+    
+    int* t=(int*)calloc(orders_rows,sizeof(int));
+    int* res=(int*)calloc(orders_rows,sizeof(int));
+    int i,j,k=0,min=20000001;
+    for(i=0;i<orders_rows;i++)
+        *(t+i)=( *(*(orders+i)+0) + *(*(orders+i)+1));
+
+    for(i=0;i<orders_rows;i++)
+    {
+        min=20000001;
+        for(j=0;j<orders_rows;j++)
+        {
+            if(*(t+j)<min)
+            {
+                min=*(t+j);k=j;
+            }
+            /*else if(*(t+j)==min)
+                k=k<j?k:j;*/
+        }
+        *(res+i)=k+1;
+        *(t+k)=20000001;
+    }
+    return res;
+}

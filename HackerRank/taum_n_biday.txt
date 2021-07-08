@@ -1,0 +1,37 @@
+        //case 1, black is more expensive then change to white
+    if(bc > wc && (wc+z) < bc)
+            {
+                    return (b*wc) + (w*wc) + (b*z);
+            }
+    else if(wc > bc && (bc+z) < wc)//case 2, white is more expensive
+            {
+                    return (b*bc) + (w*bc) + (w*z);
+    }
+
+                    return (b*bc) + (w*wc);
+
+
+
+MINE:
+
+
+long taumBday(int b, int w, int bc, int wc, int z) {
+
+  
+    long k;
+    long p=b,q=w,pc=bc,qc=wc,y=z;
+    if(abs(pc-qc)<=y)
+    {
+        k = ((p*pc)+(q*qc));
+        
+    }
+    else
+    {
+        if(pc>qc)
+            k=((p+q)*qc +(p*y));
+        else
+            k=((p+q)*pc+(q*y));   
+    }
+    return k;
+
+}

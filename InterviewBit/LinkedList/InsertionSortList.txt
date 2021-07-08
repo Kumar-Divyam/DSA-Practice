@@ -1,0 +1,50 @@
+/*
+ListNode* Solution::insertionSortList(ListNode* A) {
+    ListNode* ptr1=A->next;
+    if(ptr1==NULL)
+    return A;
+    while(ptr1!=NULL){
+        ListNode* ptr2=A;
+        while(ptr2!=ptr1){
+            if(ptr2->val > ptr1->val)
+            swap(ptr2->val,ptr1->val);
+            ptr2=ptr2->next;
+        }
+        ptr1=ptr1->next;
+    }
+    return A;
+}
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+#include<list>
+ListNode* Solution::insertionSortList(ListNode* A) {
+    if(A==NULL || A->next==NULL)
+        return A;
+    ListNode*t=A;
+    list<int> l;
+    while(t){
+        l.push_back(t->val);
+        t=t->next;
+    }
+    l.sort();
+    list <int> :: iterator it=l.begin();
+    ListNode* h = new ListNode(*it);
+    t=h;
+    it++;
+    for(; it != l.end(); it++){
+        // ListNode* temp = new ListNode(*it);
+        // t->next= temp;
+        t->next = new ListNode(*it);
+        t=t->next;
+    }
+    t->next=NULL;
+    return h;
+}

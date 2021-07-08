@@ -1,0 +1,48 @@
+int palindromeIndex(char* s) {
+
+    int n=strlen(s);
+    int i,j,p,q,flag=0;
+    i=0;j=n-1;
+    while(i<j)
+    {
+        if(s[i]==s[j])
+        {
+            i++;j--;
+        }
+        else
+        {
+            p=i+1;q=j;
+            while(p<q)
+            {
+                if(s[p]==s[q])
+                {
+                    p++;q--;
+                }
+                else
+                {
+                    flag=-1;break;
+                }
+            }
+            if(p>=q)
+                return i;
+
+            if(flag==-1)
+            {
+                p=i;q=j-1;
+                while(p<q)
+                {
+                    if(s[p]==s[q])
+                    {
+                        p++;q--;
+                    }
+                    else
+                        return -1;
+                }
+                return j;
+            }
+        }
+    }
+
+    return -1;
+
+}

@@ -1,0 +1,23 @@
+int Solution::lengthOfLastWord(const string A) {
+    if(A.length()==0) return 0;
+    int k,i=A.length()-1;
+    while(A[i]==' ')
+            i--;
+    for(k=i;k>=0;k--){
+        if(A[k]==' ')
+            break;
+    }
+    if(k<0)
+        return (i+1);
+    return (i-k);
+}
+
+/*
+int Solution::lengthOfLastWord(const string A) {
+	if(A.size()==0) return 0;
+	int pos=A.find_last_of(" ")';
+	if(pos==string::npos)
+		return A.length();
+	return A.substr(pos).length()-1;
+}
+*/

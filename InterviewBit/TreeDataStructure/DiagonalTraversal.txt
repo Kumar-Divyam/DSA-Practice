@@ -1,0 +1,49 @@
+/*
+//To get the same order as in the output traverse the tree same as we do in  level order
+vector<int> Solution::solve(TreeNode* A) {
+    map<int,vector<int>> m;
+    queue<pair<int ,TreeNode*>> q;
+    q.push({0,A});
+    while(!q.empty()){
+        TreeNode* t =q.front().second;
+        int d=q.front().first;
+        m[d].push_back(t->val);
+        cout<<d<<"  "<<t->val<<endl;
+        q.pop();
+        if(t->left)
+            q.push({d+1,t->left});
+        if(t->right)
+            q.push({d,t->right});
+    }
+    vector<int> res;
+    for(auto it: m){
+        for(int i=0;i<it.second.size();i++){
+            res.push_back(it.second[i]);
+        }
+    }
+    return res;
+}
+*/
+//To get the same order as in the output traverse the tree same as we do in pre-order traversal.
+
+void gen(TreeNode* A, vector<vector<int>> &ans, int i) {
+     if(A==NULL)return;
+     if(i==ans.size()) {
+         ans.push_back(vector<int>());
+     }
+     ans[i].push_back(A->val);
+     gen(A->left, ans, i+1);
+     gen(A->right, ans, i);
+}
+
+vector<int> Solution::solve(TreeNode* A) {
+    vector<vector<int>> ans;
+    gen(A, ans, 0);
+    vector<int> res;
+    for(auto i:ans) {//here index of ans is used as distance
+        for(auto j:i) {
+            res.push_back(j);
+        }
+    }
+    return res;
+}

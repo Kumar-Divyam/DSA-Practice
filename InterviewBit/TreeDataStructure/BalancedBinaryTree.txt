@@ -1,0 +1,50 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+int checkheight(TreeNode *l, TreeNode* r){
+    if(!l && !r)
+        return 1;
+    else if(!l && r && (r->right || r->left))
+        return 0;
+    else if(l && !r && (l->right || l->left))
+        return 0;
+    else if(l && !r && (!l->right && !l->left))
+        return 1;
+    else if(!l && r && (!r->right && !r->left))
+        return 1;
+    else 
+        return (checkheight(l->left, l->right) && checkheight(r->left,r->right));
+ }
+int Solution::isBalanced(TreeNode* A) {
+    if(!A) return 1;
+    
+    return checkheight(A->left,A->right);
+}
+
+
+/*
+bool flag;
+int checkit(TreeNode* A) {
+    if (!flag) return 0;
+    if (A == NULL) return 0;
+    int left, right;
+    left = checkit(A->left);
+    right = checkit(A->right);
+    if (abs(left - right) >= 2) {
+        flag = false;
+        return 0;
+    }
+    return max(right, left) + 1;
+}
+int Solution::isBalanced(TreeNode* A) {
+    flag = true;
+    checkit(A);
+    return flag;
+}
+*/

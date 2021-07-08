@@ -1,0 +1,19 @@
+long repeatedString(char* s, long n) {
+    int j,k,len=strlen(s);
+    long a,count=0;
+    
+    for(j=0;j<len;j++)
+    {
+        if(*(s+j)=='a')
+            count++;
+    }
+    k=n%len;
+    a=n/len;
+    count=a*count;
+    for(j=0;j<k;j++)
+    {
+        if(*(s+j)=='a')
+            count++;
+    }   
+    return count;
+}

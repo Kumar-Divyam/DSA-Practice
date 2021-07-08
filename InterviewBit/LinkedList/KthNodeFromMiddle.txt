@@ -1,0 +1,20 @@
+
+int Solution::solve(ListNode* A, int B) {
+    int mid=1,steps=0;
+    ListNode* s,*f=A;
+    if(!f->next && B!=0)
+        return -1;
+    while(f && f-> next){
+        f=f->next->next;
+        mid++;
+    }
+    steps=mid-B-1;
+    if(steps<0)
+        return -1;
+    s=A;
+    while(steps>0){
+        s=s->next;
+        steps--;
+    }
+    return s->val;
+}

@@ -1,0 +1,32 @@
+int sherlockAndMinimax(int arr_count, int* arr, int p, int q) {
+
+    /*int i,j,min,ret=-1,num=p;
+    for(i=p;i<=q;i++)
+    {
+        min=1000000000;
+        for(j=0;j<arr_count;j++)
+            min=(abs(*(arr+j)-i)<min) ? abs(*(arr+j)-i) : min;
+
+        if(ret<min)
+        {
+            ret=min;
+            num=i;
+        }
+    }
+    return num;*/
+
+    int i,j,key,min1,min2,ret;
+    for(j=1;j<arr_count;j++)
+    {
+        key=*(arr+j);
+        for(i=j-1;(i>=0)&&(*(arr+i)>key);i--)
+            *(arr+i+1)=*(arr+i);
+        *(arr+i+1)=key;
+    }
+
+    min1=(abs(*(arr)-p) < abs(*(arr+arr_count-1)-p)) ? (abs(*(arr)-p)) : abs(*(arr+arr_count-1)-p);
+    min2=(abs(*(arr)-q) < abs(*(arr+arr_count-1)-q)) ? (abs(*(arr)-p)) : abs(*(arr+arr_count-1)-q);
+    ret=min1<min2 ? p : q;
+    return ret;
+
+}

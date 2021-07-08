@@ -1,0 +1,19 @@
+int pickingNumbers(int a_count, int* a) 
+{
+    int i,j,tc,c=0;
+    for(i=0;i<a_count;i++)
+    {
+        tc=0;
+        for(j=0;j<a_count;j++)
+        {
+            if((*(a+j)-(*(a+i))==1)||(*(a+j)-(*(a+i))==0))
+                tc++;
+
+        }
+        if(tc>c)
+            c=tc;
+
+    }
+    return c;
+
+}

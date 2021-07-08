@@ -1,0 +1,67 @@
+ans = -1
+    num = -1
+    if l[0] > p:
+        if ans < (l[0] - p):
+            ans = (l[0] - p)
+            num = p
+
+    if l[n - 1] < q:
+        if ans < (q - l[n - 1]):
+            ans = (q - l[n - 1])
+            num = q
+
+    for i in range(n - 1):
+        cur = (l[i] + l[i + 1]) // 2
+        if cur <= q and cur >= p and (cur - l[i]) > ans:
+            ans = (cur - l[i])
+            num = cur
+        elif cur > q:
+            if (q - l[i]) > ans:
+                ans = (q - l[i])
+                num = q
+        elif cur < p:
+            if (l[i + 1] - p) > ans:
+                ans = (l[i + 1] - p)
+                num = p
+    print(num)
+
+
+
+
+
+
+/*min1=(abs(min-p) < abs(max-p)) ? (abs(min-p)) : abs(max-p);
+        min2=(abs(min-q) < abs(max-q)) ? (abs(min-p)) : abs(max-q);
+        ret = min1<min2 ? p : q;
+        return ret;
+
+        min1=min2=1000000000;
+        for(j=0;j<arr_count;j++)
+        {
+            min1=(abs(*(arr+j)-p)<min1) ? abs(*(arr+j)-p) : min1;
+            printf(" %d ",min1);
+        }
+        printf("\n");
+
+        for(j=0;j<arr_count;j++)
+        {
+            min2=(abs(*(arr+j)-q)<min2) ? abs(*(arr+j)-q) : min2;
+            printf(" %d ",min2);
+        }
+
+        ret = min1>=min2 ? p : q;
+        return ret;
+
+        for(i=p;i<=q;i++)
+        {
+        min=1000000000;
+        for(j=0;j<arr_count;j++)
+            min=(abs(*(arr+j)-i)<min) ? abs(*(arr+j)-i) : min;
+
+        if(ret<min)
+        {
+            ret=min;
+            num=i;
+        }
+        }
+        return num;*/

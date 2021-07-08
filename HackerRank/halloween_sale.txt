@@ -1,0 +1,30 @@
+// try for soln using Arithm. Progression
+
+
+
+int howManyGames(int p, int d, int m, int s) {
+    // Return the number of games you can buy
+
+   /* int i=0;
+    while(s>=m)
+    {
+        while(p>=m)
+        {
+            i++;
+            s-=p;
+            p-=d;
+        }
+      
+        s-=m;i++;
+    }
+    return i;*/
+
+    int count = 0;
+        while(s>=p){
+            count++;
+            s -=p;
+            p = (p-d>=m ? p-d : m);
+        }
+    return count;
+
+}

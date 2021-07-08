@@ -1,0 +1,39 @@
+char** cavityMap(int grid_count, char** grid, int* result_count) {
+
+
+    *result_count=grid_count;
+    int i,j;
+    
+   /* char**a=(char**)calloc(grid_count,(grid_count+1)*sizeof(char));
+    for(i=0;i<grid_count;i++)
+    {
+        for(j=0;j<grid_count;j++)
+            (*(*(a+i)+j))=(*(*(grid+i)+j));
+    }
+
+    for(i=0;i<(grid_count-2);i++)
+    {
+        for(j=0;j<(grid_count-2);j++)
+
+        {
+            if(((*(*(a+i+1)+j+1))>*(*(a+i)+j+1))&&((*(*(a+i+1)+j+1))>*(*(a+i+1)+j))&&((*(*(a+i+1)+j+1))>*(*(a+i+2)+j+1))&&((*(*(a+i+1)+j+1))>*(*(a+i+1)+j+2)))
+                (*(*(a+i+1)+j+1))='X';
+
+        }
+    }
+     return a;
+
+  */
+    for(i=0;i<(grid_count-2);i++)
+    {
+        for(j=0;j<(grid_count-2);j++)
+        {
+            if(((*(*(grid+i+1)+j+1))>*(*(grid+i)+j+1))&&((*(*(grid+i+1)+j+1))>*(*(grid+i+1)+j))&&((*(*(grid+i+1)+j+1))>*(*(grid+i+2)+j+1))&&((*(*(grid+i+1)+j+1))>*(*(grid+i+1)+j+2)))
+                (*(*(grid+i+1)+j+1))='X';
+        }
+    }
+
+
+
+    return grid;
+}

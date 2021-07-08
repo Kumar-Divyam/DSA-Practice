@@ -1,0 +1,23 @@
+char* balancedSums(int arr_count, int* arr) {
+
+   int i,s1=0,s2=0;
+   
+   for(i=0;i<arr_count;i++)
+        s2+=*(arr+i);
+        
+   for(i=0;i<arr_count;)
+   {
+       s2-=*(arr+i);
+       if(s1==s2)
+       {
+           return "YES";
+       }
+       else
+       {
+           s1+=*(arr+i);
+           i++;
+       }
+   }
+   return "NO";
+
+}

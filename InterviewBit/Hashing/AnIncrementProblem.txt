@@ -1,0 +1,55 @@
+vector<int> Solution::solve(vector<int> &A) {
+    unordered_map<int,int> m;
+    for(int i=0;i<A.size();i++){
+        if(m.find(A[i]) == m.end())
+            m[A[i]]=i;
+        else{
+            A[m[A[i]]]++;
+            if(m.find(A[m[A[i]]])!= m.end())
+                m[A[m[A[i]]]] = min(m[A[i]], m.find(A[m[A[i]]])->second);
+            else
+                m[A[m[A[i]]]]=m[A[i]];
+            m[A[i]]=i;
+        }
+    }
+    return A;
+}
+/*
+vector<int> Solution::solve(vector<int> &A) {
+    unordered_map<int,int> m;
+    for(int i=0;i<A.size();i++){
+        if(m.find(A[i]) == m.end())
+            m[A[i]]=i;
+        else{
+            int index_found=m[A[i]];
+            A[index_found]++;
+            if(m.find(A[index_found])!= m.end())
+                m[A[index_found]] = min(m[A[i]], m.find(A[index_found])->second);
+            else
+                m[A[index_found]]=m[A[i]];
+            m[A[i]]=i;
+        }
+    }
+    return A;
+}
+*/
+
+/*
+vector<int> Solution::solve(vector<int> &A) {
+    vector<int> res;
+    for(int i=0;i<A.size();i++)
+    {
+        auto it=find(res.begin(),res.end(),A[i]);
+        if(it!=res.end())
+        {
+            (*it)++;
+            res.push_back(A[i]);
+        }
+        else
+        {
+            res.push_back(A[i]);
+        }
+    }
+    return res;
+}
+*/

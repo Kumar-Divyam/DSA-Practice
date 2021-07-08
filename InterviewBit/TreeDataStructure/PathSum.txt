@@ -1,0 +1,47 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+ bool ispos(TreeNode* a,int rem){
+     if(!a && rem!=0)    return false;
+     else if(!a && rem==0)  return true;
+     
+     else if(a->val==rem &&(!a->left && !a->right))     return true;
+     else if(a->val!=rem && (!a->left && !a->right))    return false;
+     //else if(a->val >=rem && (a->left || a->right))   return false;//TREE CAN ALSO HAVE NEGATIVE NOS IN VAL
+     else{
+        if(!a->left)
+            return ispos(a->right,rem-(a->val));
+        else if(!a->right)
+            return ispos(a->left,rem-(a->val));
+        else
+            return ispos(a->left,rem-(a->val)) || ispos(a->right,rem-(a->val));
+     }
+ }
+int Solution::hasPathSum(TreeNode* A, int B) {
+    if(A==NULL)
+        return 0;
+    else{
+        if(ispos(A,B))
+            return 1;
+        else
+            return 0;
+    }
+}
+
+
+/*
+bool hasPathSum(TreeNode *root, int sum) {
+	if (root == NULL) return false;
+        if (root->left == NULL && root->right == NULL) {
+        	return sum == root->val;
+        }
+        int remainingSum = sum - root->val;
+        return hasPathSum(root->left, remainingSum) || hasPathSum(root->right, remainingSum);
+}
+*/

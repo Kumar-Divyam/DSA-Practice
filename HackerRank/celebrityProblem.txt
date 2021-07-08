@@ -1,0 +1,140 @@
+Algorithm1: 
+
+
+
+Create two arrays indegree and outdegree, to store the indegree and outdegree
+Run a nested loop, the outer loop from 0 to n and inner loop from 0 to n.
+For every pair i, j check if i knows j then increase the outdegree of i and indegree of j
+For every pair i, j check if j knows i then increase the outdegree of j and indegree of i
+Run a loop from 0 to n and find the id where the indegree is n-1 and outdegree is 0
+
+Code:
+bool knows(int a, int b)
+{
+    return MATRIX[a][b];
+}
+  
+int findCelebrity(int n)
+{
+
+    int indegree[n]={0},outdegree[n]={0};
+
+    for(int i=0; i<n; i++)
+    {
+        for(int j=0; j<n; j++)
+        {
+            int x = knows(i,j);
+             
+            //set the degrees
+            outdegree[i]+=x;
+            indegree[j]+=x;
+        }
+    }
+
+    for(int i=0; i<n; i++)
+    if(indegree[i] == n-1 && outdegree[i] == 0)
+        return i;
+     
+    return -1;
+}
+
+
+
+Algorithm2: 
+
+Create a stack and push all the id’s in the stack.
+Run a loop while there are more than 1 element in the stack.
+Pop top two element from the stack (represent them as A and B)
+If A knows B, then A can’t be a celebrity and push B in stack. Else if A doesn’t know B, then B can’t be a celebrity push A in stack.
+Assign the remaining element in the stack as the celebrity.
+Run a loop from 0 to n-1 and find the count of persons who knows the celebrity and the number of people whom the celebrity knows. if the count of persons who knows the celebrity is n-1 and the count of people whom the celebrity knows is 0 then return the id of celebrity else return -1.
+
+code2:
+bool knows(int a, int b)
+{
+    return MATRIX[a][b];
+}
+int findCelebrity(int n)
+{
+    stack<int> s;
+ 
+    // Celebrity
+    int C;
+ 
+    // Push everybody to stack
+    for (int i = 0; i < n; i++)
+        s.push(i);
+    // Extract top 2
+    while (s.size() > 1)
+    {   int A = s.top();
+        s.pop();
+        int B = s.top();
+        s.pop();
+        if (knows(A, B))
+        {
+          s.push(B);
+        }
+        else
+        {
+          s.push(A);
+        }
+    }
+
+    if(s.empty())
+        return -1;
+
+    C = s.top();
+    s.pop();
+
+    for (int i = 0; i < n; i++)
+    {
+        // If any person doesn't know 'C' or 'C' doesn't know any person, return -1
+        if ( (i != C) &&
+                (knows(C, i) ||
+                 !knows(i, C)) )
+            return -1;
+    }
+ 
+    return C;
+}
+
+
+Algorithm 3: 
+
+Create two indices a and b, where a = 0 and b = n-1
+Run a loop until a is less than b.
+Check if a knows b, then a can’t be celebrity. so increment a, i.e. a++
+Else b cannot be celebrity, so decrement b, i.e. b–
+Assign a as the celebrity
+Run a loop from 0 to n-1 and find the count of persons who knows the celebrity and the number of people whom the celebrity knows. if the count of persons who knows the celebrity is n-1 and the count of people whom the celebrity knows is 0 then return the id of celebrity else return -1.
+
+
+code3:
+int findCelebrity(int n) {
+        if (n <= 1) {
+            return -1;
+        }
+
+        int left = 0;
+        int right = n - 1;
+
+        // First find the right candidate known by everyone, but doesn't know anyone.
+        while (left < right) {
+            if (knows(left, right)) {
+                left++;
+            } else {
+                right--;
+            }
+        }
+
+        // Validate if the candidate knows none and everyone knows him.
+        int candidate = right;
+        for (int i = 0; i < n; i++) {
+            if (i != candidate && (!knows(i, candidate) || knows(candidate, i))) {
+                return -1;
+            }
+        }
+
+        return candidate;
+    }
+}

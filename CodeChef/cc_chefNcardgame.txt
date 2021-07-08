@@ -1,0 +1,58 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void chefNcrdgame(void)
+{
+    int n=1;
+    int a=1,b=1,sum_a,sum_b,wincount_a=0,wincount_b=0;
+    scanf("%d",&n);
+
+    for(int i=1;i<=n;i++)
+    {
+        scanf("%d %d",&a,&b);
+        sum_a=0;sum_b=0;
+        while(a>0)
+        {
+            sum_a+=a%10;
+            a/=10;
+        }
+        while(b>0)
+        {
+            sum_b+=b%10;
+            b/=10;
+        }
+        if(sum_a>sum_b)
+            wincount_a++;
+        else if(sum_a==sum_b)
+        {
+            wincount_a++;wincount_b++;
+        }
+        else
+            wincount_b++;
+
+    }
+    if(wincount_a>wincount_b)
+    {
+        int i=0;
+        printf("%d %d\n",i,wincount_a);
+    }
+    else if(wincount_a<wincount_b)
+    {
+        int i=1;
+        printf("%d %d\n",i,wincount_b);
+    }
+    else
+    {
+        int i=2;
+        printf("%d %d\n",i,wincount_b);
+    }
+}
+int main()
+{
+    int T,i;
+    scanf("%d",&T);
+    for(i=0;i<T;i++)
+        chefNcrdgame();
+
+    return 0;
+}

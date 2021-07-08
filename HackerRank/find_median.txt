@@ -1,0 +1,41 @@
+int findMedian(int arr_count, int* arr) {
+
+    int temp=0,x=0,i=0,l=0,r=arr_count-1,pos=0,k=arr_count/2;
+
+
+    while(pos!=k)
+    {
+        x = arr[r];
+        i = l; 
+        for (int j = l; j <= r - 1; j++)
+        { 
+            if (arr[j] <= x) 
+            { 
+                temp=arr[i];
+                arr[i]=arr[j];
+                arr[j]=temp;
+                i++; 
+            } 
+        } 
+        temp=arr[i];
+        arr[i]=arr[r];
+        arr[r]=temp;
+        pos= i; 
+
+  
+        if (pos == k) 
+            return arr[pos]; 
+
+        if (pos > k)
+        {
+            r=pos-1;
+        }
+        else
+        {
+            l=pos+1;
+        }
+
+    }
+    return arr[pos]; 
+
+}

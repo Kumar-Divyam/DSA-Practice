@@ -1,0 +1,20 @@
+int* stones(int n, int a, int b, int* result_count) {
+    int i,p,q;
+    if(a>b)
+    {
+        p=a;q=b;
+    }
+    else
+    {
+        p=b;q=a;
+    }
+    *result_count=n;
+    int*ar=(int*)calloc(n,sizeof(int));
+
+    for(i=0;i<n;i++)
+    {
+        *(ar+i)=((i*p)+((n-i-1)*q));
+    }
+    return ar;
+
+}

@@ -1,0 +1,21 @@
+int toys(int w_count, int* w) {
+
+    int i,j,count=1,key;
+    for(j=1;j<w_count;j++)
+    {
+        key=*(w+j);
+        for(i=j-1;(i>=0)&&(*(w+i)>key);i--)
+            *(w+i+1)=*(w+i);
+        *(w+i+1)=key;
+    }
+
+    key=*(w+0);
+    for(i=0;i<w_count;i++)
+    {
+        if(*(w+i)>(key+4))
+        {
+            key=*(w+i);count++;
+        }
+    }
+    return count;
+}

@@ -1,0 +1,53 @@
+int Solution::bulbs(vector<int> &A) {
+    int press=0;
+    for(int i=0;i<A.size();i++){
+       if(press%2){	//if pressed odd times current state is changed
+           if(A[i]==1)
+               press++;
+       }
+       else{	//if pressed even times original state 
+           if(A[i]==0)
+            press++;
+       }
+    }
+    return press;
+}
+
+
+
+/*
+//useless soln with overheads
+int Solution::bulbs(vector<int> &A) {
+    int on=0,off=0;
+    for(int i=0;i<A.size();i++){
+        if(A[i]==1)
+            on++;
+    }
+    off=A.size()-on;
+    int press=0;
+    for(int i=0;i<A.size();i++){
+        if(off==0)
+            return press;
+        if(press%2){
+            if(A[i]==1){
+                press++;
+                swap(on,off);
+                on--;
+            }
+            else
+                on--;
+        }
+        else{
+            if(A[i]==0){
+                press++;
+                swap(on,off);
+                on--;
+            }
+            else
+                on--;
+        }
+        
+    }
+    return press;
+}
+*/

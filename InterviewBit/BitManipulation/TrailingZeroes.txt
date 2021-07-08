@@ -1,0 +1,8 @@
+int solve(int A) {
+    int res=0;
+    while(A%2==0){
+        res++;
+        A/=2;
+    }
+    return res;
+}

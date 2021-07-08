@@ -1,0 +1,65 @@
+/*
+ListNode* Solution::mergeKLists(vector<ListNode*> &A) {
+    priority_queue<int, vector<int>, greater<int>> pq;
+    ListNode * temp;
+    
+    for(ListNode* i:A){
+        temp = i;
+        while(temp != nullptr){
+            pq.push(temp->val); temp = temp->next;
+        }
+    }
+    
+    // ListNode *head(0); -> this causes error
+    ListNode *head = new ListNode(0);
+    temp = head;
+    while(!pq.empty()){
+        int topV = pq.top(); pq.pop();
+        temp->next = new ListNode (topV);
+        temp = temp->next;
+    }
+    return head->next;
+}
+*/
+
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode(int x) : val(x), next(NULL) {}
+ * };
+ */
+//  struct ListNode* comp(struct ListNode *a,struct ListNode*b){
+//      return a->val < b-> val ? a : b;
+//  }
+struct comp{
+    bool operator()(
+        ListNode* a, ListNode* b)
+    {
+        return a->val > b->val;
+    }
+};
+
+ListNode* Solution::mergeKLists(vector<ListNode*> &A) {
+    priority_queue<ListNode*, vector<ListNode*>, comp> p;
+    ListNode * head=new ListNode(0);
+    ListNode* cur =head;
+    for(int i=0;i<A.size();i++){
+        if(A[i]!= NULL)
+            p.push(A[i]);
+    }
+    if(p.empty())
+        return NULL;
+        
+    while(!p.empty()){
+        ListNode* t=p.top();
+        cur->next=t;
+        cur=t;
+        p.pop();
+        if(t->next)
+            p.push(t->next);
+    }    
+    
+    return head-> next;
+}

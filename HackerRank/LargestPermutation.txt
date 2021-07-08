@@ -1,0 +1,26 @@
+int* largestPermutation(int k, int arr_count, int* arr, int* result_count) {
+
+    int n=arr_count;
+    * result_count=arr_count;
+    int i,j;
+    if(k>arr_count)
+       k=arr_count;
+    for(i=0;i<k;i++,n--)
+    {   
+        for(j=i+1;j<arr_count;j++)
+        {
+
+            if(*(arr+j)==n)
+            {
+                if((arr_count-n)==j)
+                    i--;
+                
+                break;
+            }
+        }
+        *(arr+j)=*(arr+i);
+        *(arr+i)=n;
+    }
+  
+    return arr;
+}

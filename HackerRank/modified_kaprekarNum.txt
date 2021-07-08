@@ -1,0 +1,59 @@
+void kaprekarNumbers(int p, int q) {
+    int flag=0;
+    long long i,j,x1,x2,a,x3,c1;
+    for(i=(long long)p;i<=q;i++)
+    {
+        c1=0;
+        j=x2=(long long)i*i;
+        x1=i;
+        while(x1!=0)
+        {
+            x1/=10;
+            c1++;
+        }
+        for(a=0;a<c1;a++)
+            x2/=10;
+        x3=x2;
+
+        for(a=0;a<c1;a++)
+            x2*=10;
+        x2=j-x2;
+
+        if((x2+x3)==i)
+        {
+            printf("%d ",i);
+            flag=1;
+        }
+
+    }
+    if(flag!=1)
+        printf("INVALID RANGE");
+
+
+}
+
+
+/*
+// check why better soln
+long int n,m,r,f;
+    int flag = 0;
+    scanf("%ld\n%ld",&n,&m);
+    for(long int i=n;i<=m;i++){
+        long int sum;
+        long int a = 0;
+        long int k = i;
+        while(k>0){
+            k/=10 ; 
+            ++a;
+        }
+       long int p = i * i;
+        long int g = pow(10,a);
+        sum = p%g + p/g;
+        if(sum == i){
+            printf("%ld ",sum);
+            flag++;
+        }
+    }
+    if(flag == 0)
+        printf("INVALID RANGE");       
+    return 0;*/

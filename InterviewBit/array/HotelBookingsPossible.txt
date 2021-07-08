@@ -1,0 +1,36 @@
+bool Solution::hotel(vector<int> &arrive, vector<int> &depart, int K) {
+    int minrooms=1;
+    int cur_open=0;
+    vector<pair <int, int>> v;
+    for(int i=0;i<arrive.size();i++){
+        v.push_back(make_pair(arrive[i],1));
+        v.push_back(make_pair(depart[i],-1));
+    }
+    sort(v.begin(),v.end());
+    for(int i=0;i<v.size();i++){
+        if(v[i].second==-1)
+            cur_open--;
+        else if(v[i].second==1 && cur_open<minrooms)
+            cur_open++;
+        else if(v[i].second==1 && cur_open==minrooms){
+            cur_open++;
+            minrooms++;
+        }
+    }
+    if(minrooms<=K)
+        return true;
+    return false;
+}
+
+/* OR
+    for(int i=0;i<v.size();i++){
+        if(v[i].second==-1)
+            cur_open--;
+        else if(v[i].second==1){
+            cur_open++;
+            minrooms=max(cur_open,minrooms);
+        }
+    }
+    return (K>= minrooms);
+
+*/

@@ -1,0 +1,12 @@
+int Solution::strStr(const string A, const string B) {
+    if(A.length()==0 || B.length()==0)
+        return -1;
+        
+    if(A.length() >= B.length()){
+        int i=A.find(B);
+            return i;
+    }
+    return -1;
+}
+
+//knucle morris pratt algo

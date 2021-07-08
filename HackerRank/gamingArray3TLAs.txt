@@ -1,0 +1,20 @@
+char* gamingArray(int arr_count, int* arr) {
+
+    int i,max,pos,count=1,n=arr_count;
+
+    while(n!=0)
+    {
+        max=0;
+        for(i=0;i<n;i++)
+        {
+            if(*(arr+i)>max)
+            {
+                max=*(arr+i);
+                pos=i;
+            }
+        }
+        count++;
+        n=pos;
+    }
+    return (count%2==0 ? "BOB" : "ANDY");
+}

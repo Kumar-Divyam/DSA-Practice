@@ -1,0 +1,14 @@
+29/10/19
+
+What are the Real Life Applications of Data Structures.
+
+a) To store a set of programs which are to be given access to a hard disk according to their priority.
+b) For representing a city region telephone network.
+c) To store a set of fixed key words which are referenced very frequently.
+d) To represent an image in the form of a bitmap.
+e) To implement back functionality in the internet browser.
+f) To store dynamically growing data which is accessed very frequently, based upon a key value.
+g) To implement printer spooler so that jobs can be printed in the order of their arrival.
+h) To record the sequence of all the pages browsed in one session.
+i) To implement the undo function in a text editor.
+j) To store information about the directories and files in a system.

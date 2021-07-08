@@ -1,0 +1,19 @@
+int beautifulDays(int i, int j, int k) 
+{
+    int count=0,rev,n;
+    for(i;i<=j;i++)
+    {
+        rev=0;
+        n=i;
+        while(n!=0)
+        {
+            rev=(rev*10)+(n%10);
+            n/=10;
+        }
+        if(((abs(rev-i))%k)==0)
+            count++;
+
+    }
+    return count;
+
+}

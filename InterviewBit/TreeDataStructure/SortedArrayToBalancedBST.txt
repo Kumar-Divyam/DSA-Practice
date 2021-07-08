@@ -1,0 +1,67 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+TreeNode* buildT(int l,int r,const vector<int> &b){
+    if(l<=r && l>=0 && r<b.size()){
+        int mid=(l+r+1)/2;
+        TreeNode* croot=new TreeNode(b[mid]);
+        croot->left=buildT(l,mid-1,b);
+        croot->right=buildT(mid+1,r,b);
+        return croot;
+    }    
+    return NULL;
+}
+ 
+TreeNode* Solution::sortedArrayToBST(const vector<int> &A) {
+    if(A.size()==1){
+        TreeNode* root=new TreeNode(A[0]);
+        return root;
+    }
+    return buildT(0,A.size()-1,A);
+}
+
+
+/*
+
+For those who are getting TLE in C++:
+
+amat-cruz
+Pass vector as const and by reference and you won’t get TLE.
+
+pratyushsaha11_4628d
+Yeah it worked! Could you please explain why?
+
+amat-cruz
+Because when you pass don’t pass vector by reference, your function call creates a copy of original vector, so it will take extra time to copy, leading to TLE.
+
+sagar-prateek_407
+:exploding_head::exploding_head:
+
+ritvik-mahajan
+Yes, It really worked thanks for sharing …
+
+priya-sharma_915
+And why is const nneccesary?
+
+bhavya-pandey
+Thanks a lot for sharing man!
+
+bhavya-pandey
+Maybe because the original function has declared it as a const vector parameter
+
+kuldeep-kumar_621
+It worked, thanks a lot for sharing.
+
+saketsnet_8120ae5b4c
+thanks! now i understood
+
+manvi-sharma1
+Yeah it worked actually but I saw this comment after I corrected my code.
+
+*/

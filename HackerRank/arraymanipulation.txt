@@ -1,0 +1,29 @@
+long arrayManipulation(int n, int queries_rows, int queries_columns, int** queries) 
+{
+    long * a=(long *)calloc((n+1),sizeof(long));
+    long largest=0;
+    int i,j,adder,first,last;
+    for(i=0;i<queries_rows;i++)
+    {
+        first=*(*(queries+i)+0);
+        last=*(*(queries+i)+1);
+        adder=*(*(queries+i)+2);
+        for(j=first;j<=last;j++)
+        {
+            *(a+j)=(*(a+j))+adder;
+            
+        }
+    }
+    for(i=0;i<=n;i++)
+    {
+        if(*(a+i)>largest)
+            largest=*(a+i);
+
+    }
+    return largest;
+
+
+}
+
+
+****** use DIFFERENCE ARRAY here  ********

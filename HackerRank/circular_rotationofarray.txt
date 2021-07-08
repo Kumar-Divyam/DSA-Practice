@@ -1,0 +1,36 @@
+int* circularArrayRotation(int a_count, int* a, int k, int queries_count, int* queries, int* result_count) 
+{
+    
+    int *b=(int*) calloc(a_count,sizeof(int));
+    int i;
+
+    k =k% a_count;
+    for(i=0;i<(a_count-k);i++)
+    {
+        *(b+i+k)=*(a+i);
+    }
+    for(;i<a_count;i++)
+    {
+        *(b+(i+k-a_count))=(*(a+i));
+    }
+    for(i=0;i<a_count;i++)
+        *(a+i)=(*(b+i));
+
+    *result_count=queries_count;
+    
+
+
+
+
+    int *c=(int*) calloc(queries_count,sizeof(int));
+
+    for(i=0;i<queries_count;i++)
+    {
+        *(c+i)=(*(b+(*(queries+i))));
+    }
+
+    return c;
+
+
+
+}

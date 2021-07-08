@@ -1,0 +1,23 @@
+void Solution::setZeroes(vector<vector<int> > &A) {
+    vector<int> row(A.size(),1);
+    vector<int> col(A[0].size(),1);
+    for(int i=0;i<A.size();i++){
+        for(int j=0;j<A[i].size();j++){
+            if(A[i][j]==0){
+                row[i]=0;col[j]=0;
+            }
+        }
+    }
+    for(int i=0;i<row.size();i++){
+        if(row[i]==0){
+            for(int j=0;j<A[0].size();j++)
+                A[i][j]=0;
+        }
+    }
+    for(int i=0;i<col.size();i++){
+        if(col[i]==0){
+            for(int j=0;j<A.size();j++)
+                A[j][i]=0;
+        }
+    }
+}

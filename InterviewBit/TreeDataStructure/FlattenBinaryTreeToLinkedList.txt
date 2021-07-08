@@ -1,0 +1,32 @@
+/**
+ * Definition for binary tree
+ * struct TreeNode {
+ *     int val;
+ *     TreeNode *left;
+ *     TreeNode *right;
+ *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+ * };
+ */
+TreeNode* Solution::flatten(TreeNode* A) {
+    // Do not write main() function.
+    // Do not read input, instead use the arguments to the function.
+    // Do not print the output, instead return values as specified
+    // Still have a doubt. Checkout www.interviewbit.com/pages/sample_codes/ for more details
+
+    if(!A || (!A->left && !A->right))  return A;
+    TreeNode* t=A;
+    while(t){
+        if(t->left){
+            TreeNode* lastr=t->left;
+            while(lastr->right)
+                lastr=lastr->right;
+            lastr->right=t->right;
+            t->right=t->left;
+            t->left=NULL;
+        }
+        t=t->right;
+    }
+    return A;
+}
+
+// naive method is to do preorder, form a list and use list to make new tree but only inplace allowed for this qn

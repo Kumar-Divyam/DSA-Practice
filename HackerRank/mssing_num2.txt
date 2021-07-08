@@ -1,0 +1,37 @@
+int* missingNumbers(int arr_count, int* arr, int brr_count, int* brr, int* result_count) {
+    int i,j,k=0;
+
+    char *s=(char *)calloc((arr_count+brr_count+1),sizeof(char));
+    int *p=(int *)calloc((brr_count,sizeof(int));
+
+    if(arr_count==0)
+    {
+        *result_count=brr_count;
+        return brr;
+    }
+
+    for(i=0;i<arr_count;i++)
+        *s=(char)(*(arr+i));
+    for(j=0;j<brr_count;i++,j++)
+        *s=(char)(*(brr+j));
+
+    for(i=0;i<arr_count;i++)
+    {
+        for(j=arr_count;j<(arr_count+brr_count+1);j++)
+        {
+            if(*(s+i)==(*(s+j)))
+            {
+                *(s+j)='-';break;
+            }
+        }
+    }
+
+    for(j=arr_count;j<(arr_count+brr_count+1);j++)
+     {
+        if((*(s+j))!='-')
+            *(p+ k++)=(int)*(s+j);
+    }
+    *result_count=k;
+    return p;
+
+}

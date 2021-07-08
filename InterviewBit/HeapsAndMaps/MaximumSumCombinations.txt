@@ -1,0 +1,85 @@
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+    sort(A.rbegin(),A.rend());
+    sort(B.rbegin(),B.rend());
+    priority_queue<int> p;
+    for(int i=0;i<C;i++){
+        for(int j=0;j<C;j++){
+            p.push(A[i]+B[j]);
+        }
+    }
+    vector<int> res;
+    for(int i=0; i<C;i++){
+        res.push_back(p.top());
+        p.pop();
+    }
+    return res;
+}
+
+
+
+
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+    sort(A.rbegin(),A.rend());
+    sort(B.rbegin(),B.rend());
+    priority_queue<pair<int,pair<int,int>>> p;
+    p.push({A[0]+B[0],{0,0}});
+    vector<int> res;
+    while(C-- >0){
+        pair<int ,pair<int,int>> a = p.top();p.pop();
+        res.push_back(a.first);
+        if(a.second.first+1 < A.size())
+            p.push({A[a.second.first+1]+B[a.second.second],{a.second.first+1,a.second.second}});
+            
+        if(a.second.first==0 && a.second.second +1 <B.size())
+            p.push({A[a.second.first]+B[a.second.second+1],{a.second.first,a.second.first+1}});
+    }
+    return res;
+}
+
+
+
+
+
+
+vector<int> Solution::solve(vector<int> &A, vector<int> &B, int C) {
+    int n = A.size();
+multiset<int, greater<int>> st;
+
+sort(A.begin(), A.end(), greater<int>());
+sort(B.begin(), B.end(), greater<int>());
+
+set<int>::iterator last;
+vector<int> ans;
+
+for(int i=0; i<n; i++)
+{
+    for(int j=0; j<n; j++)
+    {
+        if(st.size()<C)
+        {
+            st.insert(A[i]+B[j]);
+            auto ed = st.end();
+            ed--;
+            last = ed;
+        }
+        else
+        {
+            if(*last < (A[i]+B[j]))
+            {
+                st.insert(A[i]+B[j]);
+                last--;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+}
+
+for(int i=0; i<C; i++)
+    ans.push_back(*(st.begin())),
+    st.erase(st.begin());
+
+return ans;
+}

@@ -1,0 +1,18 @@
+int minimumLoss(int price_count, long* price) {
+
+    int i=0,j=0,k=0;
+    long min=2147483647;
+    for(i=0;i<price_count-1;i++)
+    {
+        for(j=i+1;j<price_count;j++)
+        {
+            if(*(price+i) > *(price+j))
+            {
+                if((*(price+i) - *(price+j))<min)
+                    min=(*(price+i) - *(price+j));
+            }
+        }
+    }
+    k=(int)min;
+    return k;
+}

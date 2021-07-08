@@ -1,0 +1,26 @@
+int beautifulTriplets(int d, int arr_count, int* arr) {
+    long i,j,k,count=0,p=0,q=1;
+    for(i=0;i<arr_count-2;i++)
+    {
+        for(j=p+1;j<arr_count-1;j++)
+        {
+            if((*(arr+j)-(*(arr+i)))==d)
+            {
+                p=j;
+                for(k=q+1;k<arr_count;k++)
+                {
+                    if((*(arr+k)-(*(arr+j)))==d)
+                    {
+                        q=k;
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+    return count;
+
+
+}
+
+//this problem gave me 5th star in problem solving

@@ -1,0 +1,17 @@
+int* icecreamParlor(int m, int arr_count, int* arr, int* result_count) {
+    *result_count = 2;
+    int i,j;
+    int* p=(int*)calloc(2,sizeof(int));
+    for(i=0;i<arr_count-1;i++)
+    {
+        for(j=arr_count-1;j>i;j--)
+        {
+            if(*(arr+i)+(*(arr+j))==(m))
+            {
+                *(p)=(i+1);
+                *(p+1)=(j+1);
+            }
+        }
+    }
+    return p;
+}

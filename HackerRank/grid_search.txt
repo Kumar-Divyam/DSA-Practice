@@ -1,0 +1,42 @@
+j<=(a-b)
+q<b;
+
+
+
+
+char* gridSearch(int G_count, char** G, int P_count, char** P) {
+    int  i,j,p,q,flag=0,a=strlen(*G);//printf("%d",a);
+    int b=strlen(*P);
+    int ct=0;
+
+    for(i=0;i<=(G_count-P_count);i++)
+    {
+        for(j=0;*(*(G+i)+j)!='\0';j++)
+        {
+            ct=0;
+            for(p=0;p<(P_count);p++)
+            {
+                for(q=0;*(*(P+p)+q)!='\0';q++)
+                {
+                    if(*(*(G+i+p)+j+q)!=(*(*(P+p)+q)))
+                    {
+                        flag=1;
+                        break;
+                    }
+
+                    ct++;
+                }
+                if(flag==1)
+                    break;
+            }
+
+            printf("%d",ct);
+
+            if(ct==(sizeof(P)/sizeof(char*)))
+                return "YES";
+        }
+    }
+
+    return "NO";
+
+}

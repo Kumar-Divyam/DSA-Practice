@@ -1,0 +1,15 @@
+int viralAdvertising(int n) {
+    int i,x=5,y,z=0;
+    for(i=1;i<=n;i++)
+    {
+        y=x/2;
+        z+=y;
+        x=y*3;
+    }
+
+    return z;
+
+    
+
+
+}

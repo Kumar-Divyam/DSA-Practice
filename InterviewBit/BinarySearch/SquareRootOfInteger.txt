@@ -1,0 +1,20 @@
+int Solution::sqrt(int A) {
+    if(A==0)
+        return 0;
+    if(A<=3)
+        return 1;
+    long long hi =A;
+    long long lo=1;
+    while(lo<=hi){
+        long long mid=lo+((hi-lo)/2);
+        long long s=mid*mid;
+        if(s== A)
+            return int(mid);
+        else if(s<A && (mid+1)*(mid+1)>A) return int(mid);
+        else if(s<A)
+            lo=mid+1;
+        else
+            hi=mid-1;
+    }
+    return lo;
+}

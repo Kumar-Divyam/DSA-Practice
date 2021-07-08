@@ -1,0 +1,38 @@
+vector<int> bfs(int n, int m, vector<vector<int>> edges, int s) {
+    vector<int> adj[n+1];
+    for(int i=0; i<m ;i++){ //constructing adj list
+        adj[edges[i][0]].push_back(edges[i][1]);
+        adj[edges[i][1]].push_back(edges[i][0]);
+    }
+    bool vis[n+1];
+    memset(vis, false, sizeof(vis));
+    int value[n+1];
+    memset(value, -1, sizeof(value));
+    queue< int> q;
+    int cur=s;
+        
+    q.push(s);
+    vis[s]=true;
+    value[s]=0;
+
+    while(!q.empty()){
+        cur=q.front();
+        q.pop();
+        for(int i=0;i<adj[cur].size();i++){
+            if(vis[adj[cur][i]]==false){
+                q.push(adj[cur][i]);
+                value[adj[cur][i]]=value[cur]+6;
+                //cout<<adj[cur][i]<<"\t"<<value[cur]+6<<endl;
+                vis[adj[cur][i]]=true;
+            }
+        }        
+    }
+    //cout<<endl;
+    vector<int> v;
+    for(int i=1;i<=n;i++){
+        if(value[i]!=0){
+            v.push_back(value[i]);
+        }
+    }
+    return v;
+}

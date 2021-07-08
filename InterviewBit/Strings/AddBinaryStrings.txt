@@ -1,0 +1,24 @@
+#include <string>
+string Solution::addBinary(string A, string B) {
+    int carry=0;
+    if(B.length()> A.length())
+        A.swap(B);
+    int i,j;    
+    string res="";
+    for(i=B.length()-1,j=A.length()-1;i>=0;i--,j--){
+        res=res+(to_string((int(A[j]-'0')+int(B[i]-'0')+carry)%2));
+        carry=(int(A[j]-'0')+int(B[i]-'0')+carry)/2;
+    }
+
+    if(j>=0){
+        while(j>=0){
+            res+=to_string((int(A[j]-'0')+carry)%2);
+            carry=(int(A[j]-'0')+carry)/2;
+            j--;
+        }
+    }
+    if(carry==1)
+            res+=to_string(carry);
+    reverse(res.begin(),res.end());
+    return res;
+}

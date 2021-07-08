@@ -1,0 +1,11 @@
+long strangeCounter(long t) {
+
+    long i,j,k=3;
+
+    for(i=3;i<t;i+=k)
+        k*=2;
+        
+    j=i-t+1;
+    
+    return j;
+}

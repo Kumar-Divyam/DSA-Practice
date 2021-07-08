@@ -1,0 +1,173 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+
+int alpha;
+struct edge{
+    int src;
+    int dst;
+    int wt;
+};
+vector<pair<int, int>> dsuf(alpha+1);
+
+
+string ltrim(const string &);
+string rtrim(const string &);
+vector<string> split(const string &);
+
+bool comparator(edge a, edge b){	//ERROR IN THIS FUNC AS PER QUESTION
+    if(a.wt != b.wt)
+        return a.wt < b.wt;
+    if((a.src+a.dst+a.wt)!=(b.src+b.dst+b.wt))
+        return (a.src+a.dst+a.wt)<(b.src+b.dst+b.wt); 
+    if(a.src!=b.src)
+        return a.src<b.src;
+        
+     return a.dst < b.dst;
+}
+
+int find(int v){
+    if(dsuf[v].first==-1){
+        return v;
+    }
+    return dsuf[v].first=find(dsuf[v].first);
+}
+
+void unionp(int from, int to){
+    if(dsuf[from].second> dsuf[to].second)
+        dsuf[to].first=from;
+    else if(dsuf[from].second< dsuf[to].second)
+        dsuf[from].first=to;
+    else{
+        dsuf[from].first=to;
+        dsuf[to].second+=1;
+    }
+}  
+/*
+ * Complete the 'kruskals' function below.
+ *
+ * The function is expected to return an INTEGER.
+ * The function accepts WEIGHTED_INTEGER_GRAPH g as parameter.
+ */
+
+/*
+ * For the weighted graph, <name>:
+ *
+ * 1. The number of nodes is <name>_nodes.
+ * 2. The number of edges is <name>_edges.
+ * 3. An edge exists between <name>_from[i] and <name>_to[i]. The weight of the edge is <name>_weight[i].
+ *
+ */
+
+int kruskals(int g_nodes, vector<int> g_from, vector<int> g_to, vector<int> g_weight) {
+    vector<edge> edge_list;
+    edge temp;
+    for(int i=0 ; i<g_weight.size() ; i++){
+        temp.src=g_from[i];
+        temp.dst=g_to[i];
+        temp.wt=g_weight[i];
+        edge_list.push_back(temp);
+    }  
+    
+    sort(edge_list.begin(),edge_list.end(),comparator);
+    
+    alpha=g_nodes;
+    for(int i=0 ;i<=g_nodes ; i++){
+        dsuf.push_back({-1,0});
+    }
+    
+    int sum=0;
+    
+    for(int i=0 ; i<g_nodes ; i++){
+        int from=find(edge_list[i].src);
+        int to=find(edge_list[i].dst);
+        if(from==to)
+            continue;
+        //cout<<edge_list[i].wt<<"\t"<<sum<<endl;
+        sum+=edge_list[i].wt;
+        unionp(from, to);     
+    }
+    
+    return sum;
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string g_nodes_edges_temp;
+    getline(cin, g_nodes_edges_temp);
+
+    vector<string> g_nodes_edges = split(rtrim(g_nodes_edges_temp));
+
+    int g_nodes = stoi(g_nodes_edges[0]);
+    int g_edges = stoi(g_nodes_edges[1]);
+
+    vector<int> g_from(g_edges);
+    vector<int> g_to(g_edges);
+    vector<int> g_weight(g_edges);
+
+    for (int i = 0; i < g_edges; i++) {
+        string g_from_to_weight_temp;
+        getline(cin, g_from_to_weight_temp);
+
+        vector<string> g_from_to_weight = split(rtrim(g_from_to_weight_temp));
+
+        int g_from_temp = stoi(g_from_to_weight[0]);
+        int g_to_temp = stoi(g_from_to_weight[1]);
+        int g_weight_temp = stoi(g_from_to_weight[2]);
+
+        g_from[i] = g_from_temp;
+        g_to[i] = g_to_temp;
+        g_weight[i] = g_weight_temp;
+    }
+
+    int res = kruskals(g_nodes, g_from, g_to, g_weight);
+
+    // Write your code here.
+    fout<<res;
+
+    fout.close();
+
+    return 0;
+}
+
+string ltrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        s.begin(),
+        find_if(s.begin(), s.end(), not1(ptr_fun<int, int>(isspace)))
+    );
+
+    return s;
+}
+
+string rtrim(const string &str) {
+    string s(str);
+
+    s.erase(
+        find_if(s.rbegin(), s.rend(), not1(ptr_fun<int, int>(isspace))).base(),
+        s.end()
+    );
+
+    return s;
+}
+
+vector<string> split(const string &str) {
+    vector<string> tokens;
+
+    string::size_type start = 0;
+    string::size_type end = 0;
+
+    while ((end = str.find(" ", start)) != string::npos) {
+        tokens.push_back(str.substr(start, end - start));
+
+        start = end + 1;
+    }
+
+    tokens.push_back(str.substr(start));
+
+    return tokens;
+}

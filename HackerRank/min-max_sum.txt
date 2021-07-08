@@ -1,0 +1,55 @@
+void miniMaxSum(int arr_count, int* arr) 
+{
+    long min=1000000000,max=0;long sum=0;
+
+    /*for(int i=0;i<arr_count;i++)
+    {
+        sum=0;
+        for(int j=0;j<arr_count;j++)
+        {
+            if(j=i)
+                continue;
+            sum+=(*(arr+j));
+            
+        }
+        if(sum<min)
+            min=sum;
+        if(sum>max)
+            max=sum
+    }*/
+
+
+    /*int i, j;  
+    for (i = 0; i < arr_count-1; i++)      
+    {
+    // Last i elements are already in place  
+        for (j = 0; j < arr_count-i-1; j++)
+        {  
+            if (*(arr+j) > *(arr+j+1))
+            {  
+                *(arr+j)=*(arr+j)+(*(arr+j+1));
+                *(arr+j+1)=*(arr+j)-(*(arr+j+1));
+                *(arr+j)=*(arr+j)-(*(arr+j+1));
+            }  
+        }
+    }
+
+    min=*(arr)+(*(arr+1))+(*(arr+2))+(*(arr+3));
+    max=*(arr+1)+(*(arr+2))+(*(arr+3))+(*(arr+4));*/
+
+
+    //BEST SOLUTION BELOW
+
+    for(int i=0;i<arr_count;i++)
+    {
+        sum+=*(arr+i);
+        if(*(arr+i)<min)
+            min=*(arr+i);
+        
+        if(*(arr+i)>max)
+            max=*(arr+i);
+    }
+
+    printf("%ld %ld",(sum-max),(sum-min));
+
+}

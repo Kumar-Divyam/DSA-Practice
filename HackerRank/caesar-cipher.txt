@@ -1,0 +1,13 @@
+char* caesarCipher(char* s, int k) {
+
+    int i;
+    for(i=0;i<strlen(s);i++)
+    {
+        if((*(s+i)>='a' && *(s+i)<='z')) 
+            *(s+i)=(((*(s+i)-'a'+k)%26)+'a');
+        
+        else if((*(s+i)>='A' && *(s+i)<='Z'))
+            *(s+i)=(((*(s+i)-'A'+k)%26)+'A');
+    }
+    return s;
+}

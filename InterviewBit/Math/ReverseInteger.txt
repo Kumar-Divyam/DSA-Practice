@@ -1,0 +1,20 @@
+int Solution::reverse(int A) {
+    long long t=0;
+    bool flag=false;
+    if(A==0) return 0;
+    if(A<0){
+        flag=true;
+        A*= -1;
+    }
+    while(A>0){
+        t=t*10 +(A%10);
+        A=A/10;
+    }
+    if(flag)
+        t=t*-1;
+        
+    if(t> INT_MAX || t< INT_MIN)
+        return 0;
+        
+    return int(t);
+}

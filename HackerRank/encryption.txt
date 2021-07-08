@@ -1,0 +1,49 @@
+char* encryption(char* s) {
+    int L=0,i=0;
+
+    while(*(s+i)!='\0')
+    {
+        if(*(s+i)!=' ')
+            L++;
+        i++;
+    }
+    int p,q,j,k=0;
+
+    p=(int)sqrt(L);
+    if(p*p==L)
+        q=p;
+    else if(p*(p+1)>=L)
+        q=p+1;
+    else
+    {
+        p=p+1;
+        q=p;
+    }
+    
+    char *arr[p]; 
+    for (i=0; i<p; i++) 
+        arr[i] = (char *)malloc(q * sizeof(char)); 
+
+    for(i=0;i<p;i++)
+    {
+        for(j=0;j<q;j++)
+        {
+            if((*(s+k)!=' ') && k<L)
+            {
+                arr[i][j]=*(s+k);k++;
+            }
+        }
+    }
+
+    for(i=0;i<q;i++)
+    {
+        for(j=0;(j<p);j++)
+        {
+            if(arr[j][i]!='\0')
+                printf("%c",arr[j][i]);
+        }
+        printf(" ");
+    }
+
+    return arr;
+}

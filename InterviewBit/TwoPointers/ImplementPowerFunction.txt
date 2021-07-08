@@ -1,0 +1,40 @@
+/*
+int Solution::pow(int x, int n, int p) {
+     if (n == 0) 
+        return 1 % p;
+    long long ans = 1, base = x;
+    while (n > 0){
+        if (n % 2 == 1){
+            ans = (ans * base) % p;
+            n--;
+        } 
+        else{
+            base = (base * base) % p;
+            n /= 2;
+        }
+    }
+    if (ans < 0) 
+        ans = (ans + p) % p;
+    return ans;
+}
+*/
+
+int Solution::pow(int x, int n, int d) {
+    if(x==0) return 0;
+    if(n==0){
+        return 1%d;
+    }
+    long long res=x;
+    long long rem=1;
+    while(n>1){
+       if(n%2==1)
+            rem=(rem*res)%d;
+        res=((res%d)*(res%d))%d;
+        n/=2;
+    }
+
+    res= (res*rem)%d;
+    while(res<0)
+        res+=d;
+    return res;
+}
