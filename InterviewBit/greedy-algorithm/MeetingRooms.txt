@@ -1,0 +1,19 @@
+int Solution::solve(vector<vector<int> > &A) {
+    int minrooms=1;
+    int cur_open=0;
+    vector<pair <int, int>> v;
+    for(int i=0;i<A.size();i++){
+        v.push_back(make_pair(A[i][0],1));
+        v.push_back(make_pair(A[i][1],-1));
+    }
+    sort(v.begin(),v.end());
+    for(int i=0;i<v.size();i++){
+        if(v[i].second==-1)
+            cur_open--;
+        else if(v[i].second==1){
+            cur_open++;
+            minrooms=max(cur_open,minrooms);
+        }
+    }
+    return minrooms;
+}

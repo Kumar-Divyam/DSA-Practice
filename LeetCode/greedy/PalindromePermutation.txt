@@ -1,0 +1,27 @@
+class Solution {
+public:
+    int longestPalindrome(string s) {
+        vector<int> alpha(26,0);
+        vector<int> A(26,0);
+        for(int i=0;i<s.length();i++){
+            if(s[i]>='a' && s[i] <= 'z')
+                alpha[int(s[i]-'a')]++;
+            else
+                A[int(s[i]-'A')]++;
+        }
+        int res=0;
+        bool f=false;
+        for(int i=0;i<26;i++){
+            res+=alpha[i]/2;
+            if(alpha[i]%2)  f=true;
+        }
+        for(int i=0;i<26;i++){
+            res+=A[i]/2;
+            if(A[i]%2)  f=true;
+        }
+        res*=2;
+        if(f)
+            return res+1;
+        return res;
+    }
+};

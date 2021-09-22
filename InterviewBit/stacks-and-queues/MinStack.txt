@@ -12,7 +12,7 @@ MinStack::MinStack() {
 
 void MinStack::push(int x) {
     s.push(x);
-    if(s1.top()>x)  
+    if(s1.top()>=x)  
         s1.push(x);
 }
 

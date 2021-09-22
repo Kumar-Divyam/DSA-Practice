@@ -18,3 +18,6 @@ int Solution::romanToInt(string A) {
     res+=m[A[i]];
     return res;
 }
+
+
+//*Or use switch-case(may be in another func)

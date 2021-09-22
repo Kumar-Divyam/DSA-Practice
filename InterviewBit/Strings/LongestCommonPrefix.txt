@@ -1,7 +1,7 @@
 string Solution::longestCommonPrefix(vector<string> &A) {
     sort(A.begin(),A.end());
-    int cnt=0,a=A[0].length();
-    int b=A[A.size()-1].length();
+    int cnt=0;
+    int a=A[0].length(),b=A[A.size()-1].length();
     for(int i=0;i<min(a,b);i++){
         if(A[0][i] == A[A.size()-1][i]) 
             cnt++;
