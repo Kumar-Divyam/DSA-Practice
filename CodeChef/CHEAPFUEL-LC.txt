@@ -1,0 +1,27 @@
+#include <iostream>
+using namespace std;
+
+void solve(){
+    int x,y,a,b,k;
+    cin>>x>>y>>a>>b>>k;
+    if((x+(k*a))>(y+(k*b))){
+        cout<<"DIESEL\n";
+    }
+    else if((x+(k*a))<(y+(k*b))){
+        cout<<"PETROL\n";
+    }
+    else{
+        cout<<"SAME PRICE\n";
+    }
+    return;
+}
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++){
+	    solve();
+	}
+	return 0;
+}

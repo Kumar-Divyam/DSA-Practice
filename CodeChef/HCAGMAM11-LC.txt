@@ -1,0 +1,34 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+void sol(){
+    int x,y;
+    cin>>x>>y;
+    string s;
+    cin>>s;
+    int lon=0,tmp=0,cnt=0;
+    for(int i=0;i<30;i++){
+        if(s[i]=='0'){
+            if(lon<tmp)
+                lon=tmp;
+            tmp=0;
+        }
+        else{
+            cnt++;
+            tmp++;
+        }
+    }
+    if(lon<tmp)
+        lon=tmp;
+    cout<<((x*cnt) + (y*lon))<<endl;
+}
+
+int main() {
+	// your code goes here
+	int t;
+	cin>>t;
+	for(int i=0;i<t;i++)
+	    sol();
+	return 0;
+}
